@@ -1,0 +1,29 @@
+name: openwebui
+
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:${OPEN_WEBUI_VERSION}
+    container_name: open-webui
+    restart: always
+
+    ports:
+      - "127.0.0.1:8080:8080"
+
+    environment:
+      OLLAMA_BASE_URL: http://192.168.3.100:11434
+
+    volumes:
+      - ./openwebui-data:/app/backend/data
+      - /mnt/workspace/apps/openwebui-files:/app/backend/data/files
+
+    networks:
+      - default
+      - ai_search_shared
+
+networks:
+  default:
+    name: openwebui_default
+
+  ai_search_shared:
+    external: true
+    name: ai_search_shared

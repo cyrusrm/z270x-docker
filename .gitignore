@@ -1,0 +1,15 @@
+# Ignore docker root
+docker-root/
+
+# Ignore searxng
+searxng/core-config/
+
+# Ignore openwebui
+openwebui/openwebui-data/
+
+# Ignore n8n
+n8n/n8n-data/
+
+# Ignore environment secrets and OS files
+.env
+.DS_Store
