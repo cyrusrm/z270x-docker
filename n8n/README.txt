@@ -4,6 +4,32 @@ Versions: https://github.com/n8n-io/n8n/releases
 
 Updates:
 ==================================================
+2026/11/15
+
+found a bug that crashes n8n-sandbox-runner-1-1
+
+Sandbox runner is failing because its Docker-in-Docker daemon cannot access a Linux kernel networking setting.
+The runner uses Docker-in-Docker (privileged: true), and its internal Docker daemon expects the Linux bridge netfilter setting to be available.
+The error even suggests a workaround:
+    DOCKER_IGNORE_BR_NETFILTER_ERROR=1
+
+Tried loading it manually using:
+    sudo modprobe br_netfilter
+It worked,  n8n-sandbox-runner-1-1 is not restarting anymore
+
+FIX:
+To make it persistent, create a module-load configuration:
+    echo br_netfilter | sudo tee /etc/modules-load.d/br_netfilter.conf
+Verify:
+    cat /etc/modules-load.d/br_netfilter.conf
+On the next reboot, systemd will load the module automatically.
+Verify after reboot
+    docker compose ps --format 'table {{.Names}}\t{{.Service}}\t{{.Status}}'
+    lsmod | grep br_netfilter
+    sysctl net.bridge.bridge-nf-call-iptables
+
+
+==================================================
 2026/11/14
 
 Version set to 2.47.7

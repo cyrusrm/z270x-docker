@@ -28,6 +28,7 @@ services:
 
   sandbox-api:
     image: ghcr.io/n8n-io/n8n-sandbox-service-api:${N8N_SANDBOX_VERSION}
+    restart: always
     depends_on:
       sandbox-certs:
         condition: service_completed_successfully
@@ -53,6 +54,7 @@ services:
 
   sandbox-runner-1:
     image: ghcr.io/n8n-io/n8n-sandbox-service-runner-dind:${N8N_SANDBOX_VERSION}
+    restart: always
     privileged: true
     depends_on:
       sandbox-api:
@@ -78,6 +80,7 @@ services:
 
   n8n:
     image: docker.io/n8nio/n8n:${N8N_VERSION}
+    restart: always
     depends_on:
       sandbox-api:
         condition: service_healthy
@@ -97,6 +100,7 @@ services:
 
   runners:
     image: ghcr.io/n8n-io/runners:${N8N_VERSION}
+    restart: always
     depends_on:
       - n8n
     environment:
