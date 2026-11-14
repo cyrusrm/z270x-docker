@@ -3,10 +3,71 @@ Versions: https://github.com/n8n-io/n8n/releases
 
 
 Updates:
-==================================================
-2026/11/15
 
-found a bug that crashes n8n-sandbox-runner-1-1
+
+==================================================
+2026/11/15 some error on sandbox
+
+Could not finish setup but was fixed after waiting for sometime
+
+Here's what most likely happened.
+1. The runner registered before it became healthy
+Remember this earlier log?
+runner registration stream established
+runner registration heartbeat sent
+runner registered
+healthy=false
+
+At that moment:
+- The runner had connected to the API.
+- It had sent its registration heartbeat.
+- But the API still considered it unhealthy.
+Later, we queried the registry and got:
+{
+  "healthy": true,
+  "cordoned": false,
+  "capacity_total": 1000
+}
+
+The runner had become healthy without a restart.
+This suggests the runner's readiness state and its registration state weren't synchronized immediately during startup.
+
+2. Why it eventually worked
+There are two important mechanisms here:
+  1. Runner preparation: The runner starts, initializes its Docker runtime, prepares the sandbox image, and checks readiness.
+  2. Heartbeat updates: The runner periodically sends its current health and capacity information to the API.
+The API uses those heartbeat updates to decide whether a runner is eligible for new sandbox workloads. 
+GitHub+1
+
+Your earlier healthy=false was likely an initial state during preparation. Once the runner became ready and reported that state through a subsequent heartbeat, the API changed it to healthy=true.
+The sandbox test then succeeded because the API finally had an eligible runner.
+
+3. What this means for your setup
+Setup completed
+You now have:
+- n8n 2.47.7 running through Docker Compose.
+- Task runners working.
+- Sandbox API 1.15.0 running.
+- Sandbox runner 1.15.0 registered and healthy.
+- Local Ollama connected.
+- AI Assistant Code Sandbox successfully tested.
+My recommendation: Leave your current configuration alone. No additional restart, Kubernetes deployment, or certificate regeneration is necessary.
+
+
+Added script check-n8n.sh
+# Background:
+# During initial startup, the sandbox runner may register with the API before
+# it is considered healthy and eligible to execute sandbox tasks.
+# This startup delay can cause temporary sandbox initialization failures,
+# particularly when bringing up the stack from a clean state.
+#
+# Run this script after starting the Docker Compose stack.
+# Wait until all checks report PASS before using n8n Code nodes,
+# to ensure the sandbox API and runner are ready.
+
+
+==================================================
+2026/11/15 found a bug that crashes n8n-sandbox-runner-1-1
 
 Sandbox runner is failing because its Docker-in-Docker daemon cannot access a Linux kernel networking setting.
 The runner uses Docker-in-Docker (privileged: true), and its internal Docker daemon expects the Linux bridge netfilter setting to be available.
@@ -33,6 +94,14 @@ Verify after reboot
 2026/11/14
 
 Version set to 2.47.7
+
+Setup
+
+2. Add a code sandbox
+    - select "n8n sandbox"
+    - set service url: http://sandbox-api:8080
+    - set API key: copied from env N8N_SANDBOX_SERVICE_API_KEY
+
 
 ==================================================
 2026/11/13 Initial installation
