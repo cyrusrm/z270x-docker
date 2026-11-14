@@ -9,6 +9,11 @@ Updates:
 Deleted previous containers and volumes and created by compose
 Set env version to v0.13.3
 
+In gui set websearch 
+websearch: toggle enable
+engine: searxng
+searxng query url: http://searxng-core:8081/search
+
 ==================================================
 2026/10/26 Initial installation
 
