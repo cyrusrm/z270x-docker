@@ -1,0 +1,17 @@
+# Sample version 2026/11/15 confirmed running
+#
+# Read the documentation before using the `docker-compose.yml` file:
+# https://docs.searxng.org/admin/installation-docker.html
+#
+# Additional variables:
+# https://docs.searxng.org/admin/settings/settings_general.html#settings-general
+# https://docs.searxng.org/admin/settings/settings_server.html#settings-server
+
+# Use a specific version tag. E.g. "latest" or "2026.3.25-541c6c3cb".
+SEARXNG_VERSION=2026.11.14-a7128d5d1
+
+# Listen to a specific address.
+#SEARXNG_HOST=[::]
+
+# Listen to a specific port.
+SEARXNG_PORT=8081
