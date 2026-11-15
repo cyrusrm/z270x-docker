@@ -93,7 +93,7 @@ services:
       N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: 'true'
     volumes:
       - ./n8n-data:/home/node/.n8n
-      - /mnt/workspace/apps/n8n-files:/files
+      - ${APP_FILES_PATH}/n8n-files:/files
     networks:
       - default
       - ai_search_shared

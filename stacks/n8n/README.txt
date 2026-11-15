@@ -1,10 +1,10 @@
 Versions: https://github.com/n8n-io/n8n/releases
+Start: docker compose up -d
+Stop: docker compose down
 
 
 
 Updates:
-
-
 ==================================================
 2026/11/15 some error on sandbox
 
