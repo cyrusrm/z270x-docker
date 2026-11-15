@@ -1,15 +1,40 @@
-# Ignore docker root
+# ==================================================
+# Docker root
+# ==================================================
 docker-root/
 
-# Ignore stacks searxng
+# ==================================================
+# SearXNG
+# ==================================================
 stacks/searxng/core-config/
 
-# Ignore stacks openwebui
+# ==================================================
+# Open WebUI
+# ==================================================
 stacks/openwebui/openwebui-data/
 
-# Ignore stacks n8n
+# ==================================================
+# n8n
+# ==================================================
 stacks/n8n/n8n-data/
 
-# Ignore environment secrets and OS files
+# ==================================================
+# Supabase
+# ==================================================
+
+# Upstream repository
+stacks/supabase/supabase/
+
+# Ignore Supabase deployment files by default
+stacks/supabase/supabase-project/*
+
+# Keep customized deployment configuration
+!stacks/supabase/supabase-project/docker-compose.yml
+!stacks/supabase/supabase-project/.gitignore
+!stacks/supabase/supabase-project/.env.example
+
+# ==================================================
+# Environment secrets and OS files
+# ==================================================
 .env
 .DS_Store
