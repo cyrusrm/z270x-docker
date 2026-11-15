@@ -1,12 +1,57 @@
 Version update: sh update.sh
-Start: docker compose up -d
-Stop: docker compose down
+Start: sh run.sh start
+Stop: sh run.sh stop
+Access: http://api-gw:8000
 
 
 
 Updates:
 ==================================================
-2026/11/14 Compose https://supabase.com/docs/guides/self-hosting/docker
+2026/11/15 Set local settings on docker compose
+
+1 SET MOUNT VOLUMES
+
+  # Storage
+  storage:
+    volumes:
+      - ${APP_FILES_PATH}/supabase/storage:/var/lib/storage:z
+
+  # Imgproxy
+  imgproxy:
+    volumes:
+      - ${APP_FILES_PATH}/supabase/storage:/var/lib/storage:z
+
+  # Database
+  db:
+    volumes:
+      - ${APP_FILES_PATH}/supabase/db-data:/var/lib/postgresql/data:Z
+
+
+2 SET NETWORK SETTINGS
+
+  api-gw:
+    networks:
+      default:
+        aliases:
+          - envoy
+          - kong
+      ai_search_shared: {}
+
+networks:
+  default:
+    name: supabase_default
+
+  ai_search_shared:
+    external: true
+    name: ai_search_shared
+
+3 ADD TO ENV FILE
+
+APP_FILES_PATH=/mnt/workspace/app
+
+
+==================================================
+2026/11/15 Compose https://supabase.com/docs/guides/self-hosting/docker
 
 # Get the code
 git clone --depth 1 --branch self-hosted/v0.8.4 https://github.com/supabase/supabase
