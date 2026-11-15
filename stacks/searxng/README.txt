@@ -1,6 +1,7 @@
 Versions: https://github.com/searxng/searxng/pkgs/container/searxng/versions?filters%5Bversion_type%5D=tagged
 Start: docker compose up -d
 Stop: docker compose down
+Access: http://searxng-core:8081
 
 
 

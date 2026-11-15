@@ -16,7 +16,7 @@ services:
       - core-data:/var/cache/searxng/
     networks:
       - default
-      - ai_search_shared
+      - ai_apps_shared
 
   valkey:
     container_name: searxng-valkey
@@ -36,6 +36,6 @@ networks:
   default:
     name: searxng_default
 
-  ai_search_shared:
+  ai_apps_shared:
     external: true
-    name: ai_search_shared
+    name: ai_apps_shared

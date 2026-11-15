@@ -1,7 +1,7 @@
 Version update: sh update.sh
 Start: sh run.sh start
 Stop: sh run.sh stop
-Access: http://api-gw:8000
+Access: http://supabase-envoy:8000
 
 
 
@@ -35,15 +35,15 @@ Updates:
         aliases:
           - envoy
           - kong
-      ai_search_shared: {}
+      ai_apps_shared: {}
 
 networks:
   default:
     name: supabase_default
 
-  ai_search_shared:
+  ai_apps_shared:
     external: true
-    name: ai_search_shared
+    name: ai_apps_shared
 
 3 ADD TO ENV FILE
 

@@ -78,7 +78,7 @@ services:
         aliases:
           - envoy
           - kong
-      ai_search_shared: {}
+      ai_apps_shared: {}
     healthcheck:
       # Using a TCP port check because this image does not include curl or wget.
       test: ["CMD-SHELL", "timeout 1 bash -c '</dev/tcp/127.0.0.1/8000'"]
@@ -592,6 +592,6 @@ networks:
   default:
     name: supabase_default
 
-  ai_search_shared:
+  ai_apps_shared:
     external: true
-    name: ai_search_shared
+    name: ai_apps_shared

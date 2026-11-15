@@ -96,7 +96,7 @@ services:
       - ${APP_FILES_PATH}/n8n-files:/files
     networks:
       - default
-      - ai_search_shared
+      - ai_apps_shared
 
   runners:
     image: ghcr.io/n8n-io/runners:${N8N_VERSION}
@@ -114,6 +114,6 @@ networks:
   default:
     name: n8n_default
 
-  ai_search_shared:
+  ai_apps_shared:
     external: true
-    name: ai_search_shared
+    name: ai_apps_shared
