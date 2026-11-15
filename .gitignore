@@ -1,14 +1,14 @@
 # Ignore docker root
 docker-root/
 
-# Ignore searxng
-searxng/core-config/
+# Ignore stacks searxng
+stacks/searxng/core-config/
 
-# Ignore openwebui
-openwebui/openwebui-data/
+# Ignore stacks openwebui
+stacks/openwebui/openwebui-data/
 
-# Ignore n8n
-n8n/n8n-data/
+# Ignore stacks n8n
+stacks/n8n/n8n-data/
 
 # Ignore environment secrets and OS files
 .env

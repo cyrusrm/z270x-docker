@@ -1,5 +1,47 @@
 Docker setup for AI Lab
 
+/mnt/workspace/
+│
+├── apps/                         # Persistent application data
+│   ├── n8n-files/
+│   ├── openwebui-files/
+│   └── comfyui-files/
+│
+├── docker/                       # Docker infrastructure
+│   ├── docker-root/
+│   ├── stacks/
+│   │   ├── automation/
+│   │   │   └── n8n/
+│   │   ├── ai-interface/
+│   │   │   └── openwebui/
+│   │   ├── search/
+│   │   │   └── searxng/
+│   │   └── backend/
+│   │       └── supabase/
+│   └── scripts/
+│
+├── llama/                        # Local AI experiments
+│
+├── projects/                     # Actual development projects
+│   ├── project-alpha/
+│   │   ├── .devcontainer/
+│   │   │   ├── devcontainer.json
+│   │   │   └── Dockerfile
+│   │   ├── src/
+│   │   ├── tests/
+│   │   ├── README.md
+│   │   └── ...
+│   │
+│   └── project-beta/
+│       ├── .devcontainer/
+│       │   └── devcontainer.json
+│       └── ...
+│
+├── sai/                           # Personal scripts and utilities
+│
+└── swapfile
+
+
 
 Installation:
 
