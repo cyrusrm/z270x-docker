@@ -1,4 +1,6 @@
 Versions: https://github.com/open-webui/open-webui/releases
+Start: docker compose up -d
+Stop: docker compose down
 
 
 
