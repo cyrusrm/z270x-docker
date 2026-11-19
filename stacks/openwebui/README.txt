@@ -5,6 +5,14 @@ Stop: docker compose down
 
 
 Updates:
+
+
+Updates:
+==================================================
+2026/11/19 Re-setup
+
+updated mount path for openwebui-data
+
 ==================================================
 2026/11/14
 

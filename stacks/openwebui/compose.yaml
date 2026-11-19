@@ -18,8 +18,8 @@ services:
       SEARXNG_QUERY_URL: ${SEARXNG_ADDRESS}/search
 
     volumes:
-      - ./openwebui-data:/app/backend/data
-      - ${APP_FILES_PATH}/openwebui-files:/app/backend/data/files
+      - ${OPEN_WEBUI_DATA_PATH}:/app/backend/data
+      - ${OPEN_WEBUI_FILES_PATH}:/app/backend/data/files
 
     networks:
       - default
