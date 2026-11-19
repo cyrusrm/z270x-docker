@@ -128,7 +128,6 @@ set_permission() {
 N8N_DATA_PATH=/mnt/workspace/docker/docker-data/n8n-data
 N8N_FILES_PATH=/mnt/workspace/apps/n8n-files
 
-set_permission "$N8N_DATA_PATH"
 set_permission "$N8N_FILES_PATH"
 
 echo
