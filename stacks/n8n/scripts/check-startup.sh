@@ -20,7 +20,10 @@
 # This script is read-only: it checks services and endpoints but does not
 # restart, stop, or modify containers or volumes.
 
+
 set -uo pipefail
+
+COMPOSE_FILE="/mnt/workspace/docker/stacks/n8n/compose.yaml"
 
 TIMEOUT=90
 INTERVAL=5
@@ -105,7 +108,7 @@ for svc in n8n runners sandbox-api sandbox-runner-1; do
 done
 
 info "Sandbox API health"
-if docker compose exec -T sandbox-api sh -lc \
+if docker compose -f "$COMPOSE_FILE" exec -T sandbox-api sh -lc \
   'wget -qO- http://127.0.0.1:8080/healthz >/dev/null'; then
   pass "sandbox API /healthz responds successfully"
 else
@@ -113,7 +116,7 @@ else
 fi
 
 info "Sandbox runner readiness"
-if docker compose exec -T sandbox-runner-1 sh -lc \
+if docker compose -f "$COMPOSE_FILE" exec -T sandbox-runner-1 sh -lc \
   'wget -qO- --no-check-certificate https://127.0.0.1:8080/readyz >/dev/null'; then
   pass "sandbox runner /readyz responds successfully"
 else
@@ -128,7 +131,7 @@ last_registry=""
 while (( SECONDS <= deadline )); do
   # The API key is expanded inside the API container. Its value is never
   # printed or copied into this script's output.
-  last_registry="$(docker compose exec -T sandbox-api sh -lc \
+  last_registry="$(docker compose -f "$COMPOSE_FILE" exec -T sandbox-api sh -lc \
     'wget -qO- --header="X-Api-Key: $SANDBOX_API_KEYS" http://127.0.0.1:8080/admin/runners' \
     2>/dev/null || true)"
 

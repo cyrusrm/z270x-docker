@@ -7,6 +7,9 @@
 
 set -euo pipefail
 
+COMPOSE_FILE="/mnt/workspace/docker/stacks/n8n/compose.yaml"
+ENV_FILE="/mnt/workspace/docker/stacks/n8n/.env"
+
 # ==============================
 #       Load stack .env
 # ==============================
@@ -14,13 +17,13 @@ set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
-if [[ ! -f .env ]]; then
+if [[ ! -f "$ENV_FILE" ]]; then
     echo "ERROR: .env file not found."
     exit 1
 fi
 
 set -a
-source .env
+source "$ENV_FILE"
 set +a
 
 # ==============================
@@ -39,7 +42,7 @@ fi
 # ==============================
 
 # Detect container's effective UID
-CONTAINER_UID="$(docker compose run --rm --no-deps \
+CONTAINER_UID="$(docker compose -f "$COMPOSE_FILE" run --rm --no-deps \
     --entrypoint id "$COMPOSE_SERVICE" -u)"
 
 if [[ ! "$CONTAINER_UID" =~ ^[0-9]+$ ]]; then
@@ -121,12 +124,6 @@ set_permission() {
 # ==============================
 #       Prepare directories
 # ==============================
-
-: "${N8N_DATA_PATH:?N8N_DATA_PATH missing in .env}"
-: "${N8N_FILES_PATH:?N8N_FILES_PATH missing in .env}"
-
-N8N_DATA_PATH=/mnt/workspace/docker/docker-data/n8n-data
-N8N_FILES_PATH=/mnt/workspace/apps/n8n-files
 
 set_permission "$N8N_FILES_PATH"
 

@@ -26,9 +26,11 @@ Check network bridge
     $ echo br_netfilter | sudo tee /etc/modules-load.d/br_netfilter.conf
 
 Setup permissions:
-  ./script-setup-permissions.sh
+  ./host-permissions.sh
 
 Run compose up
+
+Add permission and compose scripts
 
 
 ==================================================
