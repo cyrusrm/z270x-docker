@@ -11,6 +11,8 @@ Updates:
 
 updated ".env" and "core-config/settings.yml" example files
 
+add permission and compose scripts
+
 ==================================================
 2026/11/14
 
