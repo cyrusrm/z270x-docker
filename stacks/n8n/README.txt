@@ -1,10 +1,36 @@
 Versions: https://github.com/n8n-io/n8n/releases
 Start: docker compose up -d
 Stop: docker compose down
+Generate keys: openssl rand -base64 32
 
 
 
 Updates:
+==================================================
+2026/11/19 Re-setup
+
+Regenerate keys
+  openssl rand -base64 32
+
+Check network bridge
+  Check bridge: 
+    $ ls /proc/sys/net/bridge/
+  If no such file or directory, run: 
+    $ sudo modprobe br_netfilter
+  Should get: 
+    $ ls /proc/sys/net/bridge/
+    bridge-nf-call-arptables  bridge-nf-filter-pppoe-tagged
+    bridge-nf-call-ip6tables  bridge-nf-filter-vlan-tagged
+    bridge-nf-call-iptables   bridge-nf-pass-vlan-input-dev
+  Save permanently
+    $ echo br_netfilter | sudo tee /etc/modules-load.d/br_netfilter.conf
+
+Setup permissions:
+  ./script-setup-permissions.sh
+
+Run compose up
+
+
 ==================================================
 2026/11/15 some error on sandbox
 
