@@ -7,6 +7,11 @@ Access: http://searxng-core:8081
 
 Updates:
 ==================================================
+2026/11/19 Re-setup
+
+updated ".env" and "core-config/settings.yml" example files
+
+==================================================
 2026/11/14
 
 Made edits to compose file for overall network system coherence
