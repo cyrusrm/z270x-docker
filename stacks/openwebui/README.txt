@@ -1,17 +1,20 @@
 Versions: https://github.com/open-webui/open-webui/releases
 Start: docker compose up -d
 Stop: docker compose down
+Generate keys: openssl rand -base64 32
 
-
-
-Updates:
 
 
 Updates:
 ==================================================
 2026/11/19 Re-setup
 
-updated mount path for openwebui-data
+Updated mount path for openwebui-data
+
+Generate secret key
+  openssl rand -base64 32
+
+Removed openwebui data bind mount, changed to named volume
 
 ==================================================
 2026/11/14
