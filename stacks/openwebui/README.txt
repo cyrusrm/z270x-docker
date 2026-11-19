@@ -16,6 +16,8 @@ Generate secret key
 
 Removed openwebui data bind mount, changed to named volume
 
+Add permission and compose scripts
+
 ==================================================
 2026/11/14
 
