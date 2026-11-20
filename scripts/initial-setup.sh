@@ -4,7 +4,11 @@
 docker network create --driver bridge ai_apps_shared
 
 # create docker root folder
-mkdir ../docker-root
+DIR="../docker-root"
+
+if [ ! -d "$DIR" ]; then
+    mkdir -p $DIR
+fi
 
 # set permissions
 chmod 700 ../scripts
