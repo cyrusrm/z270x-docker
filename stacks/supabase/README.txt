@@ -1,4 +1,4 @@
-Version update: sh update.sh
+Version update: sh update.sh   (updating and rollback https://supabase.com/docs/guides/self-hosting/docker#updating)
 Start: sh run.sh start
 Stop: sh run.sh stop
 Access: http://supabase-envoy:8000
@@ -6,6 +6,48 @@ Access: http://supabase-envoy:8000
 
 
 Updates:
+==================================================
+2026/11/19 Re-setup
+
+1. Re download files
+https://supabase.com/docs/guides/self-hosting/docker#manual-installation
+
+git clone --depth 1 --branch self-hosted/v0.8.4 https://github.com/supabase/supabase
+cp -rf supabase/docker/. supabase-project
+cd supabase-project && cp .env.example .env
+printf 'ref=self-hosted/v0.8.4\n' > .supabase-version
+
+2. Confirm conflicts
+Resolve only networks
+Removed data bind mount and remained default
+
+3. Pull images
+docker compose pull
+
+4. Process keys
+sh utils/generate-keys.sh
+sh utils/add-new-auth-keys.sh
+
+5. Start (warning! finish keys setup before running)
+sh run.sh start
+
+
+Cleanup (had to cleanup since unhealthy. ran first without keys)
+sh reset.sh
+
+volume error delete permission fix:
+1. Stop the containers:bash
+docker compose down -v
+Use code with caution.
+2. Remove the contents via a temporary container:bash
+docker run --rm -v "$(pwd)/volumes/db:/db" alpine rm -rf /db/data
+Use code with caution.
+3. Verify the folder is gone and confirm reset successful
+ls -la ./volumes/db
+sh reset.sh
+
+Restart from pulling images
+
 ==================================================
 2026/11/15 Set local settings on docker compose
 
