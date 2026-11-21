@@ -1,9 +1,14 @@
 Versions: https://github.com/open-webui/open-webui/releases
 Start: docker compose up -d
 Stop: docker compose down
-Generate keys: openssl rand -base64 32
 
-
+Initial Setup:
+==================================================
+1. Inspect .env.example and correct configurations except secret and keys.
+2. Copy .env.example to .env
+3. Generate needed keys (openssl rand -base64 32) for env
+4. Run scripts/setup.sh
+5. Start docker
 
 Updates:
 ==================================================
