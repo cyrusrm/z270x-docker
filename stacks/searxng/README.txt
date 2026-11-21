@@ -3,7 +3,12 @@ Start: docker compose up -d
 Stop: docker compose down
 Access: http://searxng-core:8081
 
-
+Initial Setup:
+==================================================
+1. Inspect .env.example and correct configurations except secret and keys.
+2. Copy .env.example to .env
+3. Run scripts/setup.sh
+4. Start docker
 
 Updates:
 ==================================================
