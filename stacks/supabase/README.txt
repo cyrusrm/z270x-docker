@@ -3,7 +3,9 @@ Start: sh run.sh start
 Stop: sh run.sh stop
 Access: http://supabase-envoy:8000
 
-
+Initial Setup:
+==================================================
+Follow 2026/11/19 Re-setup but run first scripts/setup before start
 
 Updates:
 ==================================================
